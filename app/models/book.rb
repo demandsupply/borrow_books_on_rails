@@ -1,9 +1,9 @@
 class Book < ApplicationRecord
     # RELATIONS
     # if the book is destroyed, all the associated copies are destroyed
-    has_many :copies, dependent: :destroy
+    has_many :book_copies, dependent: :destroy
     # a book has many loans through the intermediate "model" copies
-    has_many :loans, through: :copies
+    has_many :loans, through: :book_copies
 
     # VALIDATIONS
     # a book must contains the "title" and "author" fields (symbols), with an hash of options {presence: true}

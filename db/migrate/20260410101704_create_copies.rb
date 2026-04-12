@@ -3,7 +3,7 @@ class CreateCopies < ActiveRecord::Migration[8.1]
     create_table :copies do |t|
       t.references :book, null: false, foreign_key: true
       t.references :library, null: false, foreign_key: true
-      t.string :status
+      t.integer :status
       t.string :barcode
 
       t.timestamps

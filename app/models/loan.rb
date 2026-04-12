@@ -1,9 +1,9 @@
 class Loan < ApplicationRecord
   # RELATIONS
   belongs_to :user
-  belongs_to :copy
+  belongs_to :book_copy
 
-  enum status: { active: 0, returned: 1, overdue: 2 }
+  enum :status, { active: 0, returned: 1, overdue: 2 }
 
   # VALIDATIONS
   # a user can have up to three active loans
@@ -28,10 +28,10 @@ class Loan < ApplicationRecord
   end
 
   def mark_copy_as_borrowed
-    copy.borrowed!
+    book_copy.borrowed!
   end
 
   def release_copy
-    copy.available! if status == "returned"
+    book_copy.available! if status == "returned"
   end
 end
