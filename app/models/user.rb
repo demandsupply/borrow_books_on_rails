@@ -11,6 +11,8 @@ class User < ApplicationRecord
 	validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 
 	# CALLBACKS
+	before_save :downcase_email, :normalize_name
+	after_commit :notify_success
 
 	# SCOPES (RAILS CONSOLE)
 	# defines a scope (a reusable model query) ---> "user.active_members" instead of "User.where(active: true, role: :member)"
@@ -22,5 +24,17 @@ class User < ApplicationRecord
 		return false unless active
 		
 		loans.where(status: :active).count < 3
+	end
+
+	def normalize_name
+		self.name = name.capitalize
+	end
+
+	def downcase_email
+		self.email = email.downcase
+	end
+
+	def notify_success
+		Rails.logger.info("user has been successfully [...]")
 	end
 end
