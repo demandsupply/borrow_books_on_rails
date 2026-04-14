@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_12_140604) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_12_155319) do
   create_table "book_copies", force: :cascade do |t|
     t.string "barcode"
     t.integer "book_id", null: false
@@ -38,14 +38,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_12_140604) do
   end
 
   create_table "loans", force: :cascade do |t|
-    t.integer "copy_id", null: false
+    t.integer "book_copy_id", null: false
     t.datetime "created_at", null: false
     t.datetime "ended_at"
     t.datetime "started_at"
     t.integer "status"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
-    t.index ["copy_id"], name: "index_loans_on_copy_id"
+    t.index ["book_copy_id"], name: "index_loans_on_book_copy_id"
     t.index ["user_id"], name: "index_loans_on_user_id"
   end
 
@@ -61,6 +61,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_12_140604) do
 
   add_foreign_key "book_copies", "books"
   add_foreign_key "book_copies", "libraries"
-  add_foreign_key "loans", "book_copies", column: "copy_id"
+  add_foreign_key "loans", "book_copies"
   add_foreign_key "loans", "users"
 end

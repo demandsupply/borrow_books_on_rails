@@ -3,7 +3,7 @@ class Loan < ApplicationRecord
   belongs_to :user
   belongs_to :book_copy
 
-  enum :status, { active: 0, returned: 1, overdue: 2 }
+  enum :status, { active: 0, returned: 1, overdue: 2 }, prefix: true
 
   # VALIDATIONS
   # a user can have up to three active loans
@@ -11,18 +11,30 @@ class Loan < ApplicationRecord
 
 
   # ACTIVE RECORD CALLBACKS
-  # calback: after a loan is created, mark that copy as "borrowed"
-  after_create :mark_copy_as_borrowed
+  # callback: after a loan is created, mark that copy as "borrowed" and add 1 to the user_loans counter
+  after_create :mark_copy_as_borrowed, :increment_user_loans_count
 
   # callback: after a copy state is updated to "returned", change that copy status to "available"
   after_update :release_copy, if: :saved_change_to_returned?
 
+  # callback: after removing a copy, decrement the user_loans counter by one
+  after_destroy :decrement_user_loans_count
 
   # PRIVATE METHODS
   private
 
+  def increment_user_loans_count
+    self.user.loans_count += 1
+  end
+
+  def decrement_user_loans_count
+    user.decrement!(:loans_count)
+  end
+
   def limit_user_loans
-    if user.active.loans.count > 3
+    if user.can_borrow_more?
+      return
+    else
       errors.add(:user, "maximum amount of loans reached!")
     end
   end

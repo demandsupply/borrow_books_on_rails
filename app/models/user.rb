@@ -23,7 +23,7 @@ class User < ApplicationRecord
 	def can_borrow_more?
 		return false unless active
 		
-		loans.where(status: :active).count < 3
+		self.loans_count < 3
 	end
 
 	def normalize_name
