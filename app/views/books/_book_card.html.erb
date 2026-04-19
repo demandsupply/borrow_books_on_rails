@@ -1,0 +1,13 @@
+<div class="book-card">
+  <h3><%= book.title %></h3>
+
+  <p><strong>Author:</strong><%= book.author %></p>
+  <p><strong>ISBN:</strong><%= book.isbn %></p>
+  <p><strong>Copies:</strong><%= book.book_copies.count %></p>
+  <p><strong>Loans:</strong><%= book.loans.count %></p>
+
+  <div class="book-actions">
+    <%= link_to "View", book_path(book) %> |
+    <%= link_to "Edit", edit_book_path(book) %> |
+  </div>
+</div>
