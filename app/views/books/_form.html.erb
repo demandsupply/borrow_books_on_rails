@@ -1,0 +1,21 @@
+<%= form_with(model: book) do |f| %>
+    <div>
+        <%= f.label :title, "Titolo" %>
+        <%= f.text_field :title %>
+    </div>
+    <div>
+        <%= f.label :author, "Author" %>
+        <%= f.text_field :author %>
+    </div>
+    <div>
+        <%= f.label :description, "Description" %>
+        <%= f.text_area :description, rows: 4, cols: 60 %>
+    </div>
+    <div>
+        <%= f.label :isbn, "ISBN" %>
+        <%= f.text_field :isbn %>
+    </div>
+    <div>
+        <%= f.submit "Update" %>
+    </div>
+<% end %>

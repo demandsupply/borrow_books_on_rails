@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show]
+  before_action :set_book, only: [:show, :edit, :update]
 
   def index
     @books = Book.all.order(title: :asc)
@@ -16,6 +16,15 @@ class BooksController < ApplicationController
   end
 
   def edit
+    @book
+  end
+
+  def update
+    if @book.update(book_params)
+      redirect_to books_path, notice: "Book successfully updated"
+    else
+      render :edit, status: :unprocessable_entity 
+    end
   end
 
   def destroy
@@ -26,5 +35,9 @@ class BooksController < ApplicationController
 
   def set_book
     @book = Book.find(params[:id])
+  end
+
+  def book_params
+    params.require(:book).permit(:title, :author, :isbn, :description)
   end
 end

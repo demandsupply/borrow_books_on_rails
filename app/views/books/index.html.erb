@@ -1,5 +1,6 @@
 <h1>Books#index</h1>
 <p>Find me in app/views/books/index.html.erb</p>
 <div class="book-card-container">
-    <%= render partial: "book_card", collection: @books, as: :book %>
+    <%# render the soecified partial for each item inside the collection %>
+    <%= render partial: "book_card", collection: @books, as: :book, locals: {my_var: "local variable"} || "No book to display" %> 
 </div>

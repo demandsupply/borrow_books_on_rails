@@ -12,7 +12,8 @@
 .book-card-container {
   width: 50%;
   margin: auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 36px;
 }
 
