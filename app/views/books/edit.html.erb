@@ -1,2 +1,11 @@
-<h1>Books#edit</h1>
-<%= render "form", book: @book %>
+<%= turbo_frame_tag "book-modal" do %>
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <h2>Edit Book</h2>
+
+      <%= render "form", book: @book %>
+
+      <%= link_to "Close", books_path %>
+    </div>
+  </div>
+<% end %>

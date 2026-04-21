@@ -4,3 +4,4 @@
     <%# render the soecified partial for each item inside the collection %>
     <%= render partial: "book_card", collection: @books, as: :book, locals: {my_var: "local variable"} || "No book to display" %> 
 </div>
+<%= turbo_frame_tag "book-modal" %>

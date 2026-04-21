@@ -9,7 +9,7 @@
   <p><strong>Loans:</strong><%= book.loans.count %></p>
 
   <div class="book-actions">
-    <%= link_to "View", book_path(book) %> |
-    <%= link_to "Edit", edit_book_path(book) %> |
+    <%= link_to "View", book_path(book) %> 
+    <%= link_to "Edit", edit_book_path(book), data: { turbo_frame: "book-modal" } %> 
   </div>
 </div>
