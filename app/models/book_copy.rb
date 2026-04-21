@@ -19,7 +19,7 @@ class BookCopy < ApplicationRecord
   private
 
   def generate_barcode
-    if self.barcode.nil? || self.barcode == false
+    if barcode.blank?
       self.barcode = "LIB-#{SecureRandom.hex(4).upcase}"
     end
   end
