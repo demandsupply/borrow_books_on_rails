@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_19_124710) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_26_134747) do
   create_table "book_copies", force: :cascade do |t|
     t.string "barcode"
     t.integer "book_id", null: false
     t.datetime "created_at", null: false
     t.integer "library_id", null: false
-    t.string "status"
+    t.integer "status"
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_book_copies_on_book_id"
     t.index ["library_id"], name: "index_book_copies_on_library_id"

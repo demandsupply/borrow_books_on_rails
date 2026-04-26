@@ -44,6 +44,6 @@ class Loan < ApplicationRecord
   end
 
   def release_copy
-    book_copy.available! if status == "returned"
+    book_copy.status_available! if status == "returned"
   end
 end

@@ -4,7 +4,7 @@ class BookCopy < ApplicationRecord
   belongs_to :library
   has_many :loans
 
-  enum :status, { available: 0, reserved: 1, borrowed: 2, lost: 3}
+  enum :status, { available: 0, reserved: 1, borrowed: 2, lost: 3}, prefix: true
 
 
   # VALIDATIONS
