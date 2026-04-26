@@ -15,7 +15,7 @@ class Loan < ApplicationRecord
   after_create :mark_copy_as_borrowed, :increment_user_loans_count
 
   # callback: after a copy state is updated to "returned", change that copy status to "available"
-  after_update :release_copy, if: :saved_change_to_returned?
+  after_update :release_copy, if: :saved_change_to_status?
 
   # callback: after removing a copy, decrement the user_loans counter by one
   after_destroy :decrement_user_loans_count
@@ -24,7 +24,9 @@ class Loan < ApplicationRecord
   private
 
   def increment_user_loans_count
-    self.user.loans_count += 1
+    puts "#" * 100
+    puts "METHOD: increment_user_loans_count"
+    user.increment!(:loans_count)
   end
 
   def decrement_user_loans_count
@@ -40,7 +42,9 @@ class Loan < ApplicationRecord
   end
 
   def mark_copy_as_borrowed
-    book_copy.borrowed!
+    puts "#" * 100
+    puts "METHOD: mark_copy_as_borrowed"
+    book_copy.status_borrowed!
   end
 
   def release_copy
