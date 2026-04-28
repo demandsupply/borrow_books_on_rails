@@ -34,9 +34,14 @@ class Loan < ApplicationRecord
   end
 
   def limit_user_loans
-    if user.can_borrow_more?
+    puts "#" * 100
+    puts "METHOD: limit_user_loans"
+    
+    if user.active && user.loans_count < 3      
+      puts " user allowed to get the loan"
       return
     else
+      puts " user not allowed to get the loan"
       errors.add(:user, "maximum amount of loans reached!")
     end
   end
