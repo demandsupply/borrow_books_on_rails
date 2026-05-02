@@ -11,6 +11,8 @@ class Loan < ApplicationRecord
 
 
   # ACTIVE RECORD CALLBACKS
+  before_create :set_loan_to_active 
+
   # callback: after a loan is created, mark that copy as "borrowed" and add 1 to the user_loans counter
   after_create :mark_copy_as_borrowed, :increment_user_loans_count
 
@@ -18,7 +20,7 @@ class Loan < ApplicationRecord
   after_update :release_copy, if: :saved_change_to_status?
 
   # callback: after removing a copy, decrement the user_loans counter by one
-  after_destroy :decrement_user_loans_count
+  after_destroy :decrement_user_loans_count, if: :status_active?
 
   # PRIVATE METHODS
   private
@@ -30,7 +32,9 @@ class Loan < ApplicationRecord
   end
 
   def decrement_user_loans_count
-    user.decrement!(:loans_count)
+    puts "#" * 100
+    puts "METHOD: decrement_user_loans_count"
+    user.decrement!(:loans_count)    
   end
 
   def limit_user_loans
@@ -46,6 +50,10 @@ class Loan < ApplicationRecord
     end
   end
 
+  def set_loan_to_active
+    self.status_active!
+  end
+
   def mark_copy_as_borrowed
     puts "#" * 100
     puts "METHOD: mark_copy_as_borrowed"
@@ -53,6 +61,12 @@ class Loan < ApplicationRecord
   end
 
   def release_copy
-    book_copy.status_available! if status == "returned"
+    puts "#" * 100
+    puts "METHOD: release_copy"
+    if status_returned?
+      book_copy.status_available!
+      user.decrement!(:loans_count)
+      puts "successfully change book_copy status and decremented user loans_count"
+    end
   end
 end
