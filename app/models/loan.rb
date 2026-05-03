@@ -51,7 +51,7 @@ class Loan < ApplicationRecord
   end
 
   def set_loan_to_active
-    self.status_active!
+    self.status_active! if self.status.nil?
   end
 
   def mark_copy_as_borrowed

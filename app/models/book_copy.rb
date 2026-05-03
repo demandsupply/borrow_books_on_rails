@@ -13,10 +13,14 @@ class BookCopy < ApplicationRecord
   
   # ACTIVE RECORD CALLBACKS
   # create a callback BEFORE checking validations (before_validation --> validation --> before_save --> save on db --> after_save)
-  before_validation :generate_barcode, on: :create
+  before_validation :set_status_to_available, :generate_barcode, on: :create
 
-
+  
   private
+
+  def set_status_to_available
+    self.status_available! if self.status.nil?
+  end
 
   def generate_barcode
     if barcode.blank?
