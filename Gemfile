@@ -28,6 +28,8 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
+gem 'ransack'
+
 gem 'rails-erd', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb

@@ -13,4 +13,9 @@ class Book < ApplicationRecord
 
     # ACTIVE RECORD CALLBACKS
     after_commit -> { Rails.logger.info("the book has successfully been created!") }
+
+
+    def self.ransackable_attributes(auth_object=nil)
+        ["author", "created_at", "description", "id", "isbn", "title"]
+    end
 end

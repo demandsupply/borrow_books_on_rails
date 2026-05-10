@@ -1,87 +1,87 @@
 <h1>Data</h1>
 
 <div class="tables-container">
+	<h2>Users</h2>
   <table>
-		<h2>Users</h2>
-			<tr>
-				<th>name</th>
-				<th>email</th>
-				<th>loans_count</th>
-				<th>role</th>
-			</tr>
-			<% @users.each do |user| %>
-			<tr>
-				<td><%= user.name %></td>
-				<td><%= user.email %></td>
-				<td><%= user.loans_count %></td>
-				<td><%= user.role %></td>
-			</tr>
-			<% end %>
+		<tr>
+			<th>name</th>
+			<th>email</th>
+			<th>loans_count</th>
+			<th>role</th>
+		</tr>
+		<% @users.each do |user| %>
+		<tr>
+			<td><%= user.name %></td>
+			<td><%= user.email %></td>
+			<td><%= user.loans_count %></td>
+			<td><%= user.role %></td>
+		</tr>
+		<% end %>
 	</table>
 
+	<h2>Libraries</h2>
   <table>
-		<h2>Libraries</h2>
-			<tr>
-				<th>Name</th>
-				<th>Location</th>
-			</tr>
-			<% @libraries.each do |l| %>
-			<tr>
-				<td><%= l.name %></td>
-				<td><%= l.location %></td>
-			</tr>
-			<% end %>
+		<tr>
+			<th>Name</th>
+			<th>Location</th>
+		</tr>
+		<% @libraries.each do |l| %>
+		<tr>
+			<td><%= l.name %></td>
+			<td><%= l.location %></td>
+		</tr>
+		<% end %>
 	</table>
 
+	<h2>Books</h2>
   <table>
-		<h2>Books</h2>
-			<tr>
-				<th>Title</th>
-				<th>Author</th>
-				<th>Description</th>
-				<th>Isbn</th>
-			</tr>
-			<% @books.each do |b| %>
-			<tr>
-				<td><%= b.title %></td>
-				<td><%= b.author %></td>
-				<td><%= b.description %></td>
-				<td><%= b.isbn %></td>
-			</tr>
-			<% end %>
+		<tr>
+			<th><%= sort_link(@q, :title, "Title") %></th>
+			<th><%= sort_link(@q, :author, "Author") %></th>
+			<th>Description</th>
+			<th>Isbn</th>
+		</tr>
+		<% @books.each do |b| %>
+		<tr>
+			<td><%= b.title %></td>
+			<td><%= b.author %></td>
+			<td><%= b.description %></td>
+			<td><%= b.isbn %></td>
+		</tr>
+		<% end %>
 	</table>
 
+	<h2>Book Copies</h2>
   <table>
-		<h2>Book Copies</h2>
-			<tr>
-				<th>Book id</th>
-				<th>Library id</th>
-				<th>Status</th>
-				<th>Barcode</th>
-			</tr>
-			<% @book_copies.each do |bc| %>
-			<tr>
-				<td><%= bc.book_id%></td>
-				<td><%= bc.library_id %></td>
-				<td><%= bc.status %></td>
-				<td><%= bc.barcode %></td>
-			</tr>
-			<% end %>
+		<tr>
+			<th>Book id</th>
+			<th>Library id</th>
+			<th>Status</th>
+			<th>Barcode</th>
+		</tr>
+		<% @book_copies.each do |bc| %>
+		<tr>
+			<td><%= bc.book_id%></td>
+			<td><%= bc.library_id %></td>
+			<td><%= bc.status %></td>
+			<td><%= bc.barcode %></td>
+		</tr>
+		<% end %>
 	</table>
 
+	<h2>Loans</h2>
   <table>
-		<h2>Loans</h2>
-			<tr>
-				<th>Book Copy Id</th>
-				<th>User Id</th>
-				<th>Status</th>
-			</tr>
-			<% @loans.each do |l| %>
-			<tr>
-				<td><%= l.book_copy_id%></td>
-				<td><%= l.user_id %></td>
-				<td><%= l.status %></td>
-			</tr>
-			<% end %>
+		<tr>
+			<th>Book Copy Id</th>
+			<th>User Id</th>
+			<th>Status</th>
+		</tr>
+		<% @loans.each do |l| %>
+		<tr>
+			<td><%= l.book_copy_id%></td>
+			<td><%= l.user_id %></td>
+			<td><%= l.status %></td>
+		</tr>
+		<% end %>
 	</table>
 </div>
