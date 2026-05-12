@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_26_134747) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_12_162508) do
+  create_table "authors", force: :cascade do |t|
+    t.string "author_name"
+    t.text "biography"
+    t.date "birth_date"
+    t.datetime "created_at", null: false
+    t.date "death_date"
+    t.string "nationality"
+    t.datetime "updated_at", null: false
+  end
+
   create_table "book_copies", force: :cascade do |t|
     t.string "barcode"
     t.integer "book_id", null: false
@@ -23,12 +33,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_134747) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string "author"
+    t.integer "author_id"
     t.datetime "created_at", null: false
     t.text "description"
     t.string "isbn"
     t.string "title"
     t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_books_on_author_id"
   end
 
   create_table "libraries", force: :cascade do |t|
@@ -62,6 +73,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_134747) do
 
   add_foreign_key "book_copies", "books"
   add_foreign_key "book_copies", "libraries"
+  add_foreign_key "books", "authors"
   add_foreign_key "loans", "book_copies"
   add_foreign_key "loans", "users"
 end
