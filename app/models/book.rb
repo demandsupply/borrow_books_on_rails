@@ -5,6 +5,8 @@ class Book < ApplicationRecord
     # a book has many loans through the intermediate "model" copies
     has_many :loans, through: :book_copies
 
+    belongs_to :author
+
     # VALIDATIONS
     # a book must contains the "title" and "author" fields (symbols), with an hash of options {presence: true}
     validates(:title, :author, {presence: true})
