@@ -4,8 +4,11 @@ class Book < ApplicationRecord
     has_many :book_copies, dependent: :destroy
     # a book has many loans through the intermediate "model" copies
     has_many :loans, through: :book_copies
-
+    # a book can have only ONE author
     belongs_to :author
+    # a book can have more genres
+    has_and_belongs_to_many :genres
+
 
     # VALIDATIONS
     # a book must contains the "title" and "author" fields (symbols), with an hash of options {presence: true}
